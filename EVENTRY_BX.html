@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EVENTRY</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+        <link href="file:///storage/emulated/0/Download/ico.svg" rel="icon">
+    <style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+* {
+    margin:0;
+    padding:0;
+    transition:.3s;
+    font-family:"Raleway", sans-serif;
+    box-sizing:border-box;
+    user-select:none;
+}
+#app {
+    height:100vh;
+    width:100vw;
+    top:0;
+    left:0;
+    position:fixed;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    overflow:scroll;
+}
+#app nav {
+    height:65px;
+    width:320px;
+    z-index:10;
+    top:0;
+    background:rgba(255,255,255,.4);
+    backdrop-filter:blur(5px);
+    position:fixed;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#app nav #navbox {
+    height:50px;
+    width:300px;
+    border-radius:5px;
+    box-shadow:0 0 8px rgba(0,0,0,.5);
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+#app nav #navbox i {
+    font-size:29px;
+    background:#f1f1f1;
+    color:#444;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#app nav #navbox input {
+    height:50px;
+    width:200px;
+    letter-spacing:1px;
+    font-weight:300;
+    font-size:20px;
+    padding:5px;
+    color:#444;
+    border:none;
+    outline:none;
+}
+#app nav #navbox #bars, #search {
+    height:50px;
+    width:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#app.open {
+    transform:translate3d(20vw, 0, 0);
+}
+#intro {
+    height:100%;
+    width:100vw;
+    background:#f1f1f1;
+    color:#444;
+    z-index:1;
+    user-select:none;
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#intro #center {
+    height:50px;
+    width:260px;
+    position:absolute;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+#intro i {
+    font-size:3em;
+    animation:pop 1s ease-in;
+}
+#intro h2 {
+    font-size:1.75em;
+    font-weight:350;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    animation:pop 1s ease-in;
+}
+@keyframes pop {
+    0% {
+        transform:scale(5);
+        filter:blur(25px);
+    }
+    100% {
+        transfrom:scale(1);
+        filter:blur(0px);
+    }
+}
+#side {
+    height:100%;
+    width:20vw;
+    top:0;
+    font-size:26px;
+    color:#444;
+    background:#f1f1f1;
+    position:fixed;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-direction:column;
+}
+#side i:hover {
+    color:#ff2a4a;
+    transform:rotate(360deg);
+}
+#app #eventTaker {
+    height:300px;
+    width:300px;
+    border-radius:6px;
+    box-shadow:0 0 8px rgba(0,0,0,.5);
+    z-index:10;
+    background:rgba(255,255,255,.4);
+    backdrop-filter:blur(5px);
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+#app #eventTaker form {
+    height:90%;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-direction:column;
+}
+#app #eventTaker form h3 {
+    font-weight:400;
+    color:#ff2a4a;
+    letter-spacing:1px;
+    font-size:23px;
+    text-transform:uppercase;
+}
+#app #eventTaker form input {
+    height:50px;
+    width:260px;
+    border-bottom:2px solid #444;
+    background:#f1f1f1;
+    color:#444;
+    letter-spacing:1px;
+    font-size:20px;
+    font-weight:300;
+    padding:5px;
+    border-radius:5px;
+    border:none;
+    outline:none;
+}
+#app #eventTaker form input[type=submit] {
+    width:100px;
+    background:#444;
+    color:#f1f1f1;
+}
+#app #events {
+    height:auto;
+    width:100vw;
+    top:65px;
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    overflow:scroll;
+}
+#app #events .container {
+    height:50px;
+    width:300px;
+    margin:8px 0;
+    border-radius:5px;
+    box-shadow:0 0 8px rgba(0,0,0,.5);
+    display:flex;
+    justify-content:space-between;
+    flex-direction:column;
+}
+#app #events .container .more {
+    height:100px;
+    width:300px;
+    border-radius:0 0 5px 5px;
+    background:#f1f1f1;
+    color:#444;
+    font-weight:350;
+    font-size:21px;
+    padding:2px;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    overflow:scroll;
+}
+#app #events .container.active {
+    height:150px;
+}
+#app #events .container.active .more {
+    display:flex;
+}
+#app #events .container .box {
+    height:50px;
+    width:300px;
+    border-radius:5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+#app #events .container .box .indexs, .bx-chevron-down {
+    height:50px;
+    width:50px;
+    font-size:26px;
+    background:#f1f1f1;
+    color:#444;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#app #events .container .box .indexs {
+    border-radius:5px 0 0 5px;
+    font-size:26px;
+}
+#app #events .container .box .bx-chevron-down {
+    border-radius:0 5px 5px 0;
+    font-size:26px;
+}
+#app #events .container .box .texts {
+    height:50px;
+    width:200px;
+    font-size:21px;
+    font-weight:300;
+    color:#444;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:scroll;
+}
+    </style>
+    </head>
+    <body>
+    <section id="intro">
+        <div id="center">
+            <i class="bx bx-calendar-event"></i>
+            <h2>Eventry</h2>
+        </div>
+    </section>
+    <section id="app" class="closed">
+        <nav id="nav">
+            <div id="navbox">
+                <i class="bx bx-menu" style="border-radius:5px 0 0 0;" id="bars"></i>
+                <input type="text" placeholder="Search..." id="searchBox" />
+                <i class="bx bx-search" style="border-radius:0 5px 0 0;" id="search"></i>
+            </div>
+        </nav>
+        <div id="eventTaker">
+            <form onsubmit="saveData();return false">
+                <h3>New Event</h3>
+                <input type="text" placeholder="Title..." id="titles" required />
+                <input type="text" placeholder="Description..." id="descriptions" required />
+                <input type="submit" value="SAVE" id="saver"/>
+            </form>
+        </div>
+        <div id="events"></div>
+    </section>
+    <aside id="side">
+        <i class="bx bx-home" id="ToHome"></i>
+        <i class="bx bx-moon" id="modes"></i>
+        <i class="bx bx-plus" id="adder"></i>
+        <i class="bx bx-share-alt" id="share"></i>
+        <i class="bx bx-cog" id="sets"></i>
+    </aside>
+    </body>
+    <script>
+side.style.left = "-50vw"
+bars.onclick = () => {
+    if(app.classList.contains("closed")) {
+        app.classList.remove("closed")
+        app.classList.add("open")
+        side.style.left = "0"
+        bars.classList.remove("bx-menu")
+        bars.classList.add("bx-right-arrow-alt")
+    }
+    else {
+        app.classList.remove("open")
+        app.classList.add("closed")
+        side.style.left = "-50vw"
+        bars.classList.remove("bx-right-arrow-alt")
+        bars.classList.add("bx-menu")
+    }
+}
+onload = () => {
+    setTimeout(() => {
+        intro.style.display = "none"
+    }, 5000)
+}
+modes.onclick = () => {
+    if(modes.classList.contains("bx-moon")) {
+        modes.classList.remove("bx-moon")
+        modes.classList.add("bx-sun")
+        document.body.bgColor = "#444"
+        side.style.background = "#666"
+        side.style.color = "#f1f1f1"
+        bars.style.background = "#666"
+        search.style.background = "#666"
+        bars.style.color = "#f1f1f1"
+        search.style.color = "#f1f1f1"
+        searchBox.style.background = "#f1f1f1"
+        saver.style.background = "#f1f1f1"
+        saver.style.color = "#444"
+        document.querySelectorAll(".indexs").forEach( e => {
+            e.style.background = "#666"
+            e.style.color = "#f1f1f1"
+        })
+        document.querySelectorAll(".bx-chevron-down").forEach( e => {
+            e.style.background = "#666"
+            e.style.color = "#f1f1f1"
+        })
+        document.querySelectorAll(".box").forEach( e => {
+            e.style.background = "#f1f1f1"
+            e.style.color = "#444"
+        })
+        eventTaker.style.background = "rgba(0,0,0,.4)"
+        nav.style.background = "rgba(0,0,0,.4)"
+        document.querySelectorAll(".more").forEach(e => {
+            e.style.background = "#666"
+            e.style.color = "#f1f1f1"
+        })
+    } else if(modes.classList.contains("bx-sun")) {
+        modes.classList.remove("bx-sun")
+        modes.classList.add("bx-moon")
+        document.body.bgColor = "#fff"
+        side.style.background = "#f1f1f1"
+        side.style.color = "#444"
+        bars.style.background = "#f1f1f1"
+        search.style.background = "#f1f1f1"
+        bars.style.color = "#444"
+        search.style.color = "#444"
+        searchBox.style.background = "#fff"
+        saver.style.background = "#444"
+        saver.style.color = "#f1f1f1"
+        document.querySelectorAll(".indexs").forEach( e => {
+            e.style.background = "#f1f1f1"
+            e.style.color = "#444"
+        })
+        document.querySelectorAll(".bx-chevron-down").forEach( e => {
+            e.style.background = "#f1f1f1"
+            e.style.color = "#444"
+        })
+        document.querySelectorAll(".box").forEach( e => {
+            e.style.background = "#fff"
+            e.style.color = "#444"
+        })
+        eventTaker.style.background = "rgba(255,255,255,.4)"
+        nav.style.background = "rgba(255,255,255,.4)"
+        document.querySelectorAll(".more").forEach( e => {
+            e.style.background = "#f1f1f1"
+            e.style.color = "#444"
+        })
+    }
+}
+ToHome.onclick = () => {
+    app.classList.remove("open")
+    app.classList.add("closed")
+    side.style.left = "-50vw"
+    bars.classList.remove("bx-right-arrow-alt")
+    bars.classList.add("bx-menu")
+}
+eventTaker.style.transform = "scale(0)"
+adder.onclick = () => {
+    if(eventTaker.style.transform == "scale(0)") {
+        eventTaker.style.transform = "scale(1)"
+        adder.style.transform = "rotate(45deg)"
+        ToHome.click()
+    } else {
+        eventTaker.style.transform = "scale(0)"
+        adder.style.transform = "rotate(0deg)"
+    }
+}
+const saveData = () => {
+    localStorage.setItem("title", `${titles.value}`)
+    localStorage.setItem("description", `${descriptions.value}`)
+    events.innerHTML += `
+<div class="container">
+    <div class="box">
+        <div class="indexs bx bx-trash" onclick="this.parentElement.parentElement.remove();navigator.vibrate(100);"></div>
+        <div class="texts">${localStorage.getItem("title")}</div>
+        <div class="bx bx-chevron-down" onclick="this.parentElement.parentElement.classList.toggle('active')"></div>
+        </div>
+        <div class="more">${localStorage.getItem("description")}</div>
+ </div>`
+}
+searchBox.onkeyup = search.onclick = () => {
+    let x, y, z
+    x = searchBox.value.toUpperCase()
+    y = document.querySelectorAll(".box")
+    for(z = 0;z < y.length; z++) {
+    if (y[z].innerHTML.toUpperCase().indexOf(x) > -1) y[z].style.display = "flex"
+    else y[z].style.display = "none"
+    }
+}
+share.onclick = () => {
+    if(navigator.share){
+        navigator.share({
+            title: "EVENTRY",
+            text: "A COOL EVENT MANAGER APP!",
+            url: `${window.location.href}`,
+        }).then(() => console.log("Shared Successfully!")).catch((error) => console.log("Failed to share!", error))
+    }
+}
+    </script>
+</html>
