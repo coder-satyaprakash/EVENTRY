@@ -3,6 +3,7 @@
     <head>
         <title>EVENTRY</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#f1f1f1">
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
         <link href="file:///storage/emulated/0/Download/ico.svg" rel="icon">
     <style>
@@ -351,6 +352,7 @@ modes.onclick = () => {
             e.style.background = "#666"
             e.style.color = "#f1f1f1"
         })
+        document.querySelectorAll("meta")[1].content = "#444"
     } else if(modes.classList.contains("bx-sun")) {
         modes.classList.remove("bx-sun")
         modes.classList.add("bx-moon")
@@ -382,6 +384,7 @@ modes.onclick = () => {
             e.style.background = "#f1f1f1"
             e.style.color = "#444"
         })
+        document.querySelectorAll("meta")[1].content = "#f1f1f1"
     }
 }
 ToHome.onclick = () => {
