@@ -294,7 +294,7 @@
         <i class="bx bx-moon" id="modes"></i>
         <i class="bx bx-plus" id="adder"></i>
         <i class="bx bx-share-alt" id="share"></i>
-        <i class="bx bx-cog" id="sets"></i>
+        <i class="bx bx-eraser" onclick="localStorage.clear()"></i>
     </aside>
     </body>
     <script>
@@ -414,7 +414,7 @@ const saveData = () => {
         <div class="indexs bx bx-trash" onclick="this.parentElement.parentElement.remove();navigator.vibrate(100);"></div>
         <div class="texts">${localStorage.getItem("title")}</div>
         <div class="bx bx-chevron-down" onclick="this.parentElement.parentElement.classList.toggle('active')"></div>
-        </div>
+    </div>
         <div class="more">${localStorage.getItem("description")}</div>
  </div>`
 }
@@ -424,7 +424,7 @@ searchBox.onkeyup = search.onclick = () => {
     y = document.querySelectorAll(".box")
     for(z = 0;z < y.length; z++) {
     if (y[z].innerHTML.toUpperCase().indexOf(x) > -1) y[z].style.display = "flex"
-    else y[z].style.display = "none"
+        else y[z].style.display = "none"
     }
 }
 share.onclick = () => {
